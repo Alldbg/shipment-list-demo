@@ -5,7 +5,7 @@ const SSEManager = ({ onEvent, onError }) => {
 
   useEffect(() => {
     // Create the SSE connection
-    eventSourceRef.current = new EventSource('http://localhost:8081/push-endpoint');
+    eventSourceRef.current = new EventSource('https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/push-endpoint');
 
     // Event listener for SSE messages
     eventSourceRef.current.onmessage = (event) => {

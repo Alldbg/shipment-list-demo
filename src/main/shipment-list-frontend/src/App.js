@@ -11,7 +11,7 @@ const Shipments = () => {
   const [refreshKey, setRefreshKey] = useState(0); // hack0: Add refreshKey state to force refresh
 
   const fetchShipments = () => {
-    axios.get("http://localhost:8081/api/shipment").then(res => {
+    axios.get("https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/api/shipment").then(res => {
       console.log(res);
       setShipments(res.data)
     }).then(() => {
@@ -28,7 +28,7 @@ const Shipments = () => {
   }, [isFetchingComplete]);
 
   function handleRemove(shipmentId) {
-    axios.delete(`http://localhost:8081/api/shipment/${shipmentId}`)
+    axios.delete(`https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/api/shipment/${shipmentId}`)
     .then(res => {
       console.log(res.data)
       const newList = shipments.filter(
@@ -72,7 +72,7 @@ const Shipments = () => {
             }}>
               <div>
                 <Dropzone {...shipment}/>
-                <img src={`http://localhost:8081/api/shipment/${shipment.shipmentId}/image/download?t=${Date.now()}`} //hack1: cache busting to refresh
+                <img src={`https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/api/shipment/${shipment.shipmentId}/image/download?t=${Date.now()}`} //hack1: cache busting to refresh
                      alt={placeholder}
                      style={{objectFit: "contain"}}/>
 
@@ -118,7 +118,7 @@ function Dropzone(
     formData.append("file", file);
 
     axios.post(
-        `http://localhost:8081/api/shipment/${shipmentId}/image/upload`,
+        `https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/api/shipment/${shipmentId}/image/upload`,
         formData,
         {
           headers: {

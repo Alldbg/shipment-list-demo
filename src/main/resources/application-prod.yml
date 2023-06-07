@@ -1,7 +1,7 @@
 aws:
   credentials:
-    access-key: ${AWS_ACCESS_KEY_ID}
-    secret-key: ${AWS_SECRET_ACCESS_KEY}
+    access-key: AIOSFODNN7EXAMPLE
+    secret-key: wJalrXUtnFEMI/K7MDENG/bPxRfiCEXAMPLEKEY
   dynamodb:
     endpoint: https://dynamodb.eu-central-1.amazonaws.com
   s3:

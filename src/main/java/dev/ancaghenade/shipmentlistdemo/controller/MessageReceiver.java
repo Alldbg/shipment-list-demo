@@ -53,7 +53,7 @@ public class MessageReceiver {
   }
 
   @GetMapping(value = "/push-endpoint")
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin
   public SseEmitter pushData() {
 
     SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);

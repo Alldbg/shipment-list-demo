@@ -1,0 +1,31 @@
+sudo apt-get install awscli
+sdk install java 17.0.6-oracle 
+cd shipment-picture-lambda-validator/
+mvn clean package shade:shade
+
+
+cd src/main/shipment-list-frontend 
+npm install
+npm start
+
+
+
+mvn install -DskipTests=True
+java -Dspring.profiles.active=dev  -jar target/shipment-list-demo.jar
+//or
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
+
+
+pip install terraform-local
+cd setup/terraform
+chmod +777 cleanup.sh 
+./cleanup.sh
+
+ wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+ sudo apt update && sudo apt install terraform
+
+
+tflocal init
+tflocal plan -var 'env=dev'
+tflocal apply  //(then yes)

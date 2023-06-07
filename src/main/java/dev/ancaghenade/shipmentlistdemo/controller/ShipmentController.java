@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("api/shipment")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 public class ShipmentController {
 
   private final ShipmentService shipmentService;
