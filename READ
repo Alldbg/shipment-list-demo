@@ -1,19 +1,28 @@
+https://gitpod.io#snapshot/3ef6177d-17d2-4d1a-983a-e64ceb8139ef
+
+export AWS_ACCESS_KEY_ID=AIOSFODNN7EXAMPLE 
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCEXAMPLEKEY
+
+export HMR_HOST=`gp url 8081`  //T Do
+
+sudo apt-get update
 sudo apt-get install awscli
 sdk install java 17.0.6-oracle 
 cd shipment-picture-lambda-validator/
 mvn clean package shade:shade
-
+cd ../
 
 cd src/main/shipment-list-frontend 
 npm install
-npm start
+npm start &
 
 
-
+cd ../
+docker-compose up
 mvn install -DskipTests=True
 java -Dspring.profiles.active=dev  -jar target/shipment-list-demo.jar
 //or
-mvn spring-boot:run -Dspring-boot.run.profiles=prod
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
 
 pip install terraform-local

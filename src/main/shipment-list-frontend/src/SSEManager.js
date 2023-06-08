@@ -1,11 +1,12 @@
 import {useEffect, useRef} from "react";
 
+const  urlApi = "https://8081-alldbg-shipmentlistdemo-lkbx6k1kyen.ws-eu99.gitpod.io"
 const SSEManager = ({ onEvent, onError }) => {
   const eventSourceRef = useRef(null);
 
   useEffect(() => {
     // Create the SSE connection
-    eventSourceRef.current = new EventSource('https://8081-tinyg210-shipmentlistde-fve7rz5cqhg.ws-eu98.gitpod.io/push-endpoint');
+    eventSourceRef.current = new EventSource(urlApi+'/push-endpoint');
 
     // Event listener for SSE messages
     eventSourceRef.current.onmessage = (event) => {
