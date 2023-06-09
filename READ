@@ -6,7 +6,7 @@ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCEXAMPLEKEY
 export HMR_HOST=`gp url 8081`  //ToDo later
 
 sudo apt-get update
-sudo apt-get install awscli
+sudo apt-get -y install awscli
 pip install awscli-local
 sdk install java 17.0.6-oracle -Y
 cd shipment-picture-lambda-validator/

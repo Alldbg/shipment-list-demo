@@ -4,12 +4,13 @@ tasks:
   - name: global
     init: |
       sudo apt-get update
-      sudo apt-get install awscli
+      sudo apt-get -y install awscli
       sdk install java 17.0.6-oracle -Y
       pip install awscli-local
     command: |
       export AWS_ACCESS_KEY_ID=AIOSFODNN7EXAMPLE 
       export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCEXAMPLEKEY
+      gp sync-done global-syn
 
   - name: terraform
     before: |
@@ -18,7 +19,6 @@ tasks:
       chmod +777 cleanup.sh 
       pip install terraform-local
       wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-      
       echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
       sudo apt update && sudo apt install terraform
     command: |
@@ -29,6 +29,7 @@ tasks:
 
   - name: shipment-picture-lambda-validator
     before: |
+      gp sync-await global-syn
       cd shipment-picture-lambda-validator/
     init: |
       mvn clean package shade:shade
@@ -38,12 +39,19 @@ tasks:
       cd src/main/shipment-list-frontend 
     init: |
       npm install
-      npm run build
     command: |
-      npm run dev
+      npm start
  
+  - name: localStack
+    init: |
+      gp sync-await global-syn
+    command: |
+      docker-compose up
+      gp sync-done localStack-syn
+
   - name: backend
     init: |
+      gp sync-await localStack-syn
       mvn install -DskipTests=True
     command: |
-      java -Dspring.profiles.active=dev  -jar target/shipment-list-demo.jar
+      mvn spring-boot:run -Dspring-boot.run.profiles=dev
