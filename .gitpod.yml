@@ -25,7 +25,8 @@ tasks:
       ./cleanup.sh
       tflocal init
       tflocal plan -var 'env=dev'
-      tflocal apply 
+      tflocal apply
+      gp sync-done terraform-syn
 
   - name: shipment-picture-lambda-validator
     before: |
@@ -51,6 +52,7 @@ tasks:
 
   - name: backend
     init: |
+      gp sync-await terraform-syn
       gp sync-await localStack-syn
       mvn install -DskipTests=True
     command: |
